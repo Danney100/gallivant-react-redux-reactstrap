@@ -1,111 +1,124 @@
 import React, {useState} from 'react'
-import {Row, Col, Button} from 'reactstrap'
-import paginationFactory from 'react-bootstrap-table2-paginator'
-import BootstrapTable from 'react-bootstrap-table-next'
+import {Row, Col, Card, Table} from 'reactstrap'
+import PaginationsList from './PaginationsList'
 import TransactionModal from './TransactionModal'
+import {makeStyles} from '@material-ui/core/styles'
+import iconDetails from 'images/commonIcons/details.svg'
+import CommonButton from 'routes/components/CommonButton'
 
-const Transactions = () => {
+const useStyles = makeStyles({
+  imageSize: {
+    height: 15,
+    width: 15,
+    marginLeft: 2.5,
+  },
+  imgSize: {
+    width: 22,
+    height: 22,
+    borderRadius: 30,
+    backgroundColor: '#E6E0DD',
+  },
+  title: {
+    fontFamily: 'Oswald-SemiBold',
+    fontSize: 16,
+    color: '#423b3c',
+    marginTop: 15,
+  },
+  font: {
+    fontSize: '12px',
+    color: '#a09d9d',
+    fontFamily: 'Avenir-Heavy',
+  },
+  tbodyFont: {
+    fontFamily: 'SFUIText-Medium',
+    color: '#6c6766',
+    fontSize: 14,
+  },
+  theadFont: {
+    fontFamily: 'SFUIText-Semibold',
+    color: '#403839',
+    fontSize: 14,
+  },
+})
+const TransactionsContent = () => {
+  const classes = useStyles()
+
   const [modal, setModal] = useState(false)
   const toggle = () => setModal(!modal)
-  const actionFormater = () => {
-    return (
-      <Button color="secondary" onClick={toggle}>
-        <i className="fa fa-fw fa-eye" aria-hidden="true" />
-        Deatils and Join
-      </Button>
-    )
-  }
-
-  const columns = [
-    {
-      dataField: 'date',
-      text: 'Date',
-      sort: true,
-    },
-    {
-      dataField: 'displayId',
-      text: 'Display ID',
-      sort: true,
-    },
-    {
-      dataField: 'amount',
-      text: 'Amount',
-      sort: true,
-    },
-    {
-      dataField: 'type',
-      text: 'Type',
-      sort: true,
-    },
-    {
-      dataField: 'detail1',
-      text: 'Detail1',
-      sort: true,
-    },
-    {
-      dataField: 'gateway',
-      text: 'Gateway',
-      sort: true,
-    },
-    {
-      dataField: 'transactionId',
-      text: 'TransactionID',
-      sort: true,
-    },
-    {dataField: 'df1', isDummyField: true, text: '', formatter: actionFormater},
-  ]
-  const data = [
-    {
-      id: 1,
-      date: '6/19/2020',
-      displayId: 'CC487710',
-      amount: '$56.03',
-      type: 'Credit Card Payment',
-      detail1: '7454',
-      gateway: 'IDSTC Internal Credit Card',
-      transactionId: '6e11a7c1-3400-4abe-8a54-1b403f06aa3c',
-    },
-  ]
 
   return (
-    <div className="pr-2">
-      <Row className="mt-3">
-        <Col sm={12} xs={12} lg={2} className="text-lg-left text-center text-black my-auto h4">
+    <Card className="pr-2 mt-4">
+      <Row className="mt-3 border-bottom d-flex justify-content-between">
+        <Col sm={2} className={`${classes.title} d-flex justify-content-start ml-3  `}>
           Transactions
         </Col>
-        <Col
-          sm={12}
-          xs={12}
-          lg={10}
-          style={{
-            top: '7px',
-            height: 'fit-content',
-          }}
-          className="text-lg-right text-center p-0">
-          <Button className="mr-1" color="info">
-            <i className="fa fa-plus mr-1"></i>
-            Add Payment
-          </Button>
-          <Button className="mr-1" color="info">
-            <i className="fa fa-money mr-1"></i>
-            Refund Payment
-          </Button>
+        <Col sm={8} className="d-flex justify-content-end mb-2">
+          <CommonButton title="Refund Payment" buttonType="refundButton" />
+          <CommonButton title="Add Payment" buttonType="addpayButton" />
         </Col>
       </Row>
-      <Row className="mt-4">
-        <Col lg={12}>
-          <BootstrapTable
-            keyField="id"
-            data={data}
-            columns={columns}
-            pagination={paginationFactory()}
-            classes="table-responsive text-black"
-          />
+      <Row>
+        <Col lg={12} className={`${classes.font} mt-4`}>
+          <Table responsive striped>
+            <thead className={classes.theadFont}>
+              <tr>
+                <th>
+                  <span className="ml-2">Date</span>
+                </th>
+                <th>
+                  <span>Display ID</span>
+                </th>
+                <th>
+                  <span>Amount</span>
+                </th>
+                <th>
+                  <span>Type</span>
+                </th>
+                <th>
+                  <span>Detail1</span>
+                </th>
+                <th>
+                  <span>Gateway</span>
+                </th>
+                <th>
+                  <span>TransactionID</span>
+                </th>
+                <th>
+                  <span>Actions</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className={classes.tbodyFont}>5/29/2020</td>
+                <td className={classes.tbodyFont}>CC487242</td>
+                <td className={classes.tbodyFont}>$49.12</td>
+                <td className={classes.tbodyFont}>Credit Card Payment</td>
+                <td className={classes.tbodyFont}>6465</td>
+                <td className={classes.tbodyFont}>IDSTC Internal Credit Card</td>
+                <td className={classes.tbodyFont}>1728643a-bf3a-4104- 8faf-6d77c0cca286</td>
+                <td>
+                  <div>
+                    <Row>
+                      <span>
+                        <div className={classes.imgSize}>
+                          <img src={iconDetails} className={classes.imageSize} />
+                        </div>
+                     </span>
+                      <span>
+                        <div className={classes.tbodyFont}>Details and Join</div>
+                      </span>
+                    </Row>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
         </Col>
       </Row>
+      <PaginationsList />
       <TransactionModal toggle={toggle} modal={modal} />
-    </div>
+    </Card>
   )
 }
-
-export default Transactions
+export default TransactionsContent

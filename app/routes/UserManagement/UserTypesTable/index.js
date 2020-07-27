@@ -7,7 +7,7 @@ import {useHistory} from 'react-router'
 import paginationFactory from 'react-bootstrap-table2-paginator'
 import PropTypes from 'prop-types'
 import iconUser from 'images/commonIcons/user.svg'
-import iconEdit from 'images/commonIcons/edit.svg'
+import iconEdit from 'routes/components/CustomIconButton/node_modules/images/commonIcons/edit.svg'
 import iconCopy from 'images/commonIcons/copy.svg'
 import iconDelete from 'images/commonIcons/delete.svg'
 
@@ -148,7 +148,7 @@ const UserTypesTable = ({setActiveTab}) => {
                 <CustomSearch {...props.searchProps}/>
               </div>
             </div>
-            <Row className="mt-3">
+            <Row className="sc-card__full-row mt-3">
               <Col sm={12} className="p-0">
                 <BootstrapTable
                   keyField="id"

@@ -33,12 +33,10 @@ const Name = (props) => {
   const classes = useStyles()
   return (
     <Card className={classes.distance}>
-      <div tag="h5">
-        <p className={classes.name}>
-          Name
-          <hr className={classes.border} />
-        </p>
+      <div tag="h5" className="mb-0">
+        <p className={`${classes.name} mb-0`}>Name</p>
       </div>
+      <hr className={`${classes.border} mx-4 mt-2`} />
       <div>
         <Row form>
           <Col md={{size: 4, offset: 2}}>

@@ -41,9 +41,7 @@ th {
   justify-content: flex-end;
 }
 
-
 .#{$p-pre}custom-search {
-  
   .sc-input.form-control {
     padding-right: 3.5rem;
     border-top-right-radius: 0.3rem;
@@ -67,11 +65,19 @@ th {
 }
 
 .#{$p-pre}custom-search__clear-btn {
-
   .input-group-append & {
     position: absolute;
     right: rem(35px);
     padding: 0;
     z-index: 4;
   }
+}
+
+.react-bootstrap-table-pagination {
+  padding: 0 0.75rem;
+  flex-direction: row-reverse !important;
+}
+
+.react-bootstrap-table-pagination-list .pagination {
+  justify-content: flex-start;
 }

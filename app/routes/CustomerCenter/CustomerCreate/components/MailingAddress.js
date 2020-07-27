@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Col, Card, Label, FormGroup, Input, Row} from 'reactstrap'
 import {makeStyles} from '@material-ui/core/styles'
+import {states} from 'routes/OrderCenter/CreatePerson/components/state'
 
 const useStyles = makeStyles({
   title: {
@@ -41,12 +42,10 @@ const MailingAddress = (props) => {
   const classes = useStyles()
   return (
     <Card className={classes.distance}>
-      <div tag="h5">
-        <h4 className={classes.name}>
-          Default Mailing Address
-          <hr className={classes.border} />
-        </h4>
+      <div tag="h5" className="mb-0">
+        <p className={`${classes.name} mb-0`}>Default Mailing Address</p>
       </div>
+      <hr className={`${classes.border} mx-4 mt-2`} />
       <div>
         <Row form>
           <Col md={{size: 4, offset: 2}}>
@@ -72,9 +71,13 @@ const MailingAddress = (props) => {
                 name="shipping_address.county"
                 className={classes.option}
                 innerRef={register({required: 'This field is required.'})}>
-                <option value={'CA'} key={'CA'}>
-                  {'California'}
-                </option>
+                {states.map((state) => {
+                  return (
+                    <option value={state.value} key={state.value}>
+                      {state.label}
+                    </option>
+                  )
+                })}
               </Input>
             </FormGroup>
           </Col>
@@ -160,7 +163,6 @@ const MailingAddress = (props) => {
             <FormGroup className="ml-md-5 mx-3 ">
               <Label className={classes.title}>Residential</Label>
               <Input
-                Input
                 type="select"
                 name="residential"
                 className={classes.option}

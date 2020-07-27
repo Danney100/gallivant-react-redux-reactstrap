@@ -76,12 +76,10 @@ const CreditCard = (props) => {
   const classes = useStyles()
   return (
     <Card className={classes.distance}>
-      <div tag="h5">
-        <h4 className={classes.name}>
-          Credit Card
-          <hr className={classes.border} />
-        </h4>
+      <div tag="h5" className="mb-0">
+        <p className={`${classes.name} mb-0`}>Credit Card</p>
       </div>
+      <hr className={`${classes.border} mx-4 mt-2`} />
       <div>
         <FormGroup row>
           <Col sm={{size: '8', offset: '4'}} className="mt-4">

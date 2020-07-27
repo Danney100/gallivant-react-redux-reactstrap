@@ -1,5 +1,5 @@
 import React from 'react'
-import {Row, Col, Card, CardTitle, Button} from 'reactstrap'
+import {Row, Col, CardTitle, Button} from 'reactstrap'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Map} from 'immutable'
@@ -16,234 +16,247 @@ const OrderDetails = (props) => {
   }
 
   return (
-    <Row className="mt-3">
-      <Col sm={4} className="d-flex align-items-stretch">
-        <Card className="mb-3 p-3 w-100">
-          <CardTitle tag="h5">Order Information</CardTitle>
-          <div className="table-responsive">
-            <table className="table table-striped mb-0 text-black">
-              <tbody>
-                <tr>
-                  <th className="text-black">Order Owner</th>
-                  <td className="text-right">{orderDetails.customer.name}</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Order Number</th>
-                  <td className="text-right">{orderDetails.id}</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Order Date</th>
-                  <td className="text-right">{orderDetails.meta.timestamps.created_at}</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Origin</th>
-                  <td className="text-right">Replicated Websites</td>
-                </tr>
-                <tr>
-                  <th className="text-black">
-                    Event ID <i className="fa fas fa-pencil mr-1" />
-                    <i className="fa fas fa-trash mr-1" />
-                  </th>
-                  <td className="text-right">P44537</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Card>
-      </Col>
-      <Col sm={4} className="d-flex align-items-stretch">
-        <Card className="mb-3 p-3 w-100">
-          <CardTitle tag="h5">Order Status</CardTitle>
-          <div className="table-responsive">
-            <table className="table table-striped mb-0 text-black">
-              <tbody>
-                <tr>
-                  <th className="text-black">Order Status</th>
-                  <td className="text-right">{orderDetails.status}</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Order Lock Status</th>
-                  <td className="text-right">
-                    <i className="fa fa-unlock-alt"></i>
-                    {orderDetails.locked}
-                  </td>
-                </tr>
-                <tr>
-                  <th className="text-black">Payment Status</th>
-                  <td className="text-right">{orderDetails.payment}</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Posted Date</th>
-                  <td className="text-right">6/18/2020 3:23 AM</td>
-                </tr>
-                <tr>
-                  <th className="text-black">
-                    Ship Hold <i className="fa fas fa-pencil mr-1" />
-                  </th>
-                  <td className="text-right">Yes</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Card>
-      </Col>
-      <Col sm={4} className="d-flex align-items-stretch">
-        <Card className="mb-3 p-3 w-100">
-          <CardTitle tag="h5">Commission Information</CardTitle>
-          <div className="table-responsive">
-            <table className="table table-striped mb-0 text-black">
-              <tbody>
-                <tr>
-                  <th className="text-black">
-                    Commission Owner <i className="fa fas fa-pencil mr-1" />
-                  </th>
-                  <td className="text-right">michigan consultant Consultant 17041</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Commissionable</th>
-                  <td className="text-right">
-                    <i className="fa fa-fw fa-money" />
-                    {orderDetails.commissionable}
-                  </td>
-                </tr>
-                <tr>
-                  <th className="text-black">
-                    Commission Date <i className="fa fas fa-pencil mr-1" />
-                  </th>
-                  <td className="text-right">6/18/2020 3:20 AM</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Card>
-      </Col>
-      <Col sm={4} className="d-flex align-items-stretch">
-        <Card className="mb-3 p-3 w-100 text-black bg-light">
-          <CardTitle tag="h5">Shipping Information</CardTitle>
-          <Row className="mt-2">
-            <Col className="h6" sm={12} xs={12} md={12} lg={12}>
-              Shipping Address
-            </Col>
-            <Col className="h6" xs={12} md={12} lg={12}>
-              {orderDetails.shipping_address.first_name +
-                ' ' +
-                orderDetails.shipping_address.last_name}
-            </Col>
-            <Col xs={12} md={12} lg={12}>
-              {orderDetails.shipping_address.line_1}
-            </Col>
-            <Col xs={12} md={12} lg={12}>
-              {orderDetails.shipping_address.line_2}
-            </Col>
-            <Col xs={12} md={12} lg={12}>
-              {orderDetails.shipping_address.city + ', ' + orderDetails.shipping_address.country}
-            </Col>
-            <Col xs={12} md={12} lg={12}>
-              {orderDetails.shipping_address.phone_number}
-            </Col>
-            <Col xs={12} md={12} lg={12}>
-              {orderDetails.shipping_address.postcode}
-            </Col>
-            <Col xs={12} md={12} lg={12} className="mt-1">
-              <Button size="sm">
-                <i className="fa fas fa-pencil mr-1" />
-                Edit Shipping Address
-              </Button>
-            </Col>
-          </Row>
-          <Row className="mt-5">
-            <Col className="h6" sm={12} xs={12} md={12} lg={12}>
-              Shipping Method
-            </Col>
-            <Col xs={12} md={12} lg={12}>
-              Alaska & Hawaii 2 Day Air
-            </Col>
-            <Col xs={12} md={12} lg={12} className="mt-1">
-              <Button size="sm">
-                <i className="fa fas fa-pencil mr-1" />
-                Edit Shipping Method
-              </Button>
-            </Col>
-          </Row>
-        </Card>
-      </Col>
-      <Col sm={4} className="d-flex align-items-stretch">
-        <Card className="mb-3 p-3 w-100">
-          <CardTitle tag="h5">Compensation Details</CardTitle>
-          <div className="table-responsive">
-            <table className="table table-striped mb-0 text-black">
-              <tbody>
-                <tr>
-                  <th className="text-black">Consultant Price</th>
-                  <td className="text-right">$191.00</td>
-                </tr>
-                <tr>
-                  <th className="text-black">QV</th>
-                  <td className="text-right">191.00</td>
-                </tr>
-                <tr>
-                  <th className="text-black">CV</th>
-                  <td className="text-right">133.70</td>
-                </tr>
-                <tr>
-                  <th className="text-black">RV</th>
-                  <td className="text-right">191.00</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Taxable</th>
-                  <td className="text-right">$226.00</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Card>
-      </Col>
-      <Col sm={4} className="d-flex align-items-stretch">
-        <Card className="mb-3 p-3 w-100">
-          <CardTitle tag="h5">Payment Details</CardTitle>
-          <div className="table-responsive">
-            <table className="table table-striped mb-0 text-black">
-              <tbody>
-                <tr>
-                  <th className="text-black">Subtotal</th>
-                  <td className="text-right">$191.00</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Estimated Sales Tax</th>
-                  <td className="text-right">{orderDetails.meta.display_price.tax.amount}</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Shipping</th>
-                  <td className="text-right">$35.00</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Discounts</th>
-                  <td className="text-right">$0.00</td>
-                </tr>
-                <tr className="h4">
-                  <th className="text-black h4">Grand Total</th>
-                  <td className="text-right">{orderDetails.meta.display_price.with_tax.amount}</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Payments</th>
-                  <td className="text-right">{orderDetails.meta.display_price.with_tax.amount}</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Refunds</th>
-                  <td className="text-right">$0.00</td>
-                </tr>
-                <tr>
-                  <th className="text-black">Credit Memos</th>
-                  <td className="text-right">$0.00</td>
-                </tr>
-                <tr className="h4">
-                  <th className="text-black h4">Balance Due</th>
-                  <td className="text-right">$0.00</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Card>
+    <Row>
+      <Col>
+        <Row className="ml-4">
+          <Col sm={4} md={4} className="my-3">
+            <CardTitle tag="h5">Order Information</CardTitle>
+            <Row>
+              <Col className="h6 mt-2" sm={12} xs={12} md={12} lg={12}>
+                Order Owner
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                nj m (Customer C207403)
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Order Number
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                060740ac-67a5-4168-aa55-55e9ac204d3f
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Order Date
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                5/29/2020 5:43 PM
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Origin
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                Replicated Websites
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Evnet Id
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                P28028
+              </Col>
+            </Row>
+          </Col>
+          <Col sm={4} md={4} className="my-3">
+            <CardTitle tag="h5">Order Status</CardTitle>
+            <Row>
+              <Col className="h6 mt-2" sm={12} xs={12} md={12} lg={12}>
+                Order Status
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                Posted
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Order Lock Status
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                Unlocked
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Payment Status
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                Paid
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Posted Date
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                5/29/2020 5:44 PM
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Ship Hold
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                Yes
+              </Col>
+            </Row>
+          </Col>
+          <Col sm={4} md={4} className="my-3">
+            <CardTitle tag="h5">Commission Information</CardTitle>
+            <Row>
+              <Col className="h6 mt-2" sm={12} xs={12} md={12} lg={12}>
+                Commission Owner
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                John Sheere Consultant 5266
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Commissionable
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                060740ac-67a5-4168-aa55-55e9ac204d3f
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Commission Date
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                5/29/2020 5:43 PM
+              </Col>
+            </Row>
+          </Col>
+          <Col sm={4} md={4} className="my-3">
+            <CardTitle tag="h5">Shipping Information</CardTitle>
+            <Row className="mt-2">
+              <Col className="h6" sm={12} xs={12} md={12} lg={12}>
+                Shipping Address
+              </Col>
+              <Col className="h6" xs={12} md={12} lg={12}>
+                {orderDetails.shipping_address.first_name +
+                  ' ' +
+                  orderDetails.shipping_address.last_name}
+              </Col>
+              <Col xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                {orderDetails.shipping_address.line_1}
+              </Col>
+              <Col xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                {orderDetails.shipping_address.line_2}
+              </Col>
+              <Col xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                {orderDetails.shipping_address.city + ', ' + orderDetails.shipping_address.country}
+              </Col>
+              <Col xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                {orderDetails.shipping_address.phone_number}
+              </Col>
+              <Col xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                {orderDetails.shipping_address.postcode}
+              </Col>
+              <Col xs={12} md={12} lg={12} className="mt-1">
+                <Button size="sm">
+                  <i className="fa fas fa-pencil mr-1" />
+                  Edit Shipping Address
+                </Button>
+              </Col>
+            </Row>
+            <Row className="mt-5">
+              <Col className="h6" sm={12} xs={12} md={12} lg={12}>
+                Shipping Method
+              </Col>
+              <Col xs={12} md={12} lg={12}>
+                Alaska & Hawaii 2 Day Air
+              </Col>
+              <Col xs={12} md={12} lg={12} className="mt-1">
+                <Button size="sm">
+                  <i className="fa fas fa-pencil mr-1" />
+                  Edit Shipping Method
+                </Button>
+              </Col>
+            </Row>
+          </Col>
+          <Col sm={4} md={4} className="my-3">
+            <CardTitle tag="h5">Compensation Details</CardTitle>
+            <Row>
+              <Col className="h6 mt-2" sm={12} xs={12} md={12} lg={12}>
+                Consultant Price
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                $25.00
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Qv
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                25.00
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Cv
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                17.05
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Rv
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                25.00
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Taxable
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                $47.00
+              </Col>
+            </Row>
+          </Col>
+          <Col sm={4} md={4} className="my-3">
+            <CardTitle tag="h5">Payment Details</CardTitle>
+            <Row>
+              <Col className="h6 mt-2" sm={12} xs={12} md={12} lg={12}>
+                Subtotal
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                $25.00
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Estimated Sales Tax
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                $2.12
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Shipping
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                $22.00
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Discounts
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 mb-3 sc-avenir-roman">
+                ($0.00)
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={5} sm={12} md={7} tag="h5">
+                Grand Total
+              </Col>
+              <Col>{orderDetails.meta.display_price.with_tax.amount}</Col>
+            </Row>
+            <Row>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Payments
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                ($49.12)
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Refunds
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 sc-avenir-roman">
+                $0.00
+              </Col>
+              <Col className="h6 mt-3" sm={12} xs={12} md={12} lg={12}>
+                Credit Memos
+              </Col>
+              <Col sm={12} xs={12} md={12} lg={12} className="h6 mb-3 sc-avenir-roman">
+                ($0.00)
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={5} sm={12} md={7} tag="h5">
+                Balance Due
+              </Col>
+              <Col className="text-left">$0.00</Col>
+            </Row>
+          </Col>
+        </Row>
       </Col>
     </Row>
   )

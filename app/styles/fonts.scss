@@ -53,6 +53,16 @@
   src: local(Avenir-Heavy), url('../routes/font/Avenir-Heavy.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: Avenir-Light;
+  src: local(Avenir-Light), url('../routes/font/Avenir-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Avenir-Black;
+  src: local(Avenir-Light), url('../routes/font/Avenir-Black.ttf') format('truetype');
+}
+
 .#{$p-pre}sfui-text-medium {
   font-family: 'SFUIText-Medium' !important;
 }
@@ -67,4 +77,36 @@
 
 .#{$p-pre}sfui-text-bold {
   font-family: 'SFUIText-Bold' !important;
+}
+
+.#{$p-pre}avenir-light {
+  font-family: 'Avenir-Light';
+}
+
+.#{$p-pre}avenir-heavy {
+  font-family: 'Avenir-Heavy';
+}
+
+.#{$p-pre}avenir-black {
+  font-family: 'Avenir-Black';
+}
+
+.#{$p-pre}avenir-roman {
+  font-family: 'Avenir-Roman';
+}
+
+.#{$p-pre}avenir-medium {
+  font-family: 'Avenir-Medium';
+}
+
+.#{$p-pre}din-bold {
+  font-family: 'DINCondensed-Bold';
+}
+
+.#{$p-pre}oswald-semibold {
+  font-family: 'Oswald-SemiBold';
+}
+
+.#{$p-pre}oswald-regular {
+  font-family: 'Oswald-Regular';
 }

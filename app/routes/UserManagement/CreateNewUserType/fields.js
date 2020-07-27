@@ -200,7 +200,6 @@ export const moduleFields = [
       'Reactivate Customer',
       'View Events',
       'View Leads',
-      'View Leads',
       'View Notes',
       'View Orders',
       'View Payment Methods',

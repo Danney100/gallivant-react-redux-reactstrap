@@ -60,11 +60,20 @@ const useStyles = makeStyles({
 })
 
 const TabDemo = (props) => {
-  const {content, item, contentOne, contentTwo, contentThree, contentFour, contentFive} = props
+  const {
+    content,
+    item,
+    contentOne,
+    contentTwo,
+    contentThree,
+    contentFour,
+    contentFive,
+    wrapperClass,
+  } = props
   const classes = useStyles()
 
   return (
-    <div className={classes.Radius}>
+    <div className={`${classes.Radius} ${wrapperClass}`}>
       <ListGroupItem className={item === 'warning' ? classes.alertDemos : classes.demos}>
         <Media>
           <Media>
@@ -103,6 +112,11 @@ TabDemo.propTypes = {
   contentThree: PropTypes.string,
   contentFour: PropTypes.string,
   contentFive: PropTypes.string,
+  wrapperClass: PropTypes.string,
+}
+
+TabDemo.defaultProps = {
+  wrapperClass: '',
 }
 
 export default TabDemo

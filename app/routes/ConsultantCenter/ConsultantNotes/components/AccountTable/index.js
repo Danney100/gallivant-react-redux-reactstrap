@@ -79,6 +79,7 @@ const useStyles = makeStyles({
 
 const AccountTable = () => {
   const classes = useStyles()
+  const toggle = () => setModal(!modal)
   const [modal, setModal] = useState(false)
   const [nestedModal, setNestedModal] = useState(false)
   const [closeAll, setCloseAll] = useState(false)
@@ -86,7 +87,7 @@ const AccountTable = () => {
     setNestedModal(!nestedModal)
     setCloseAll(false)
   }
-  const toggle = () => setModal(!modal)
+
   const closeBtn = (
     <button className="close" onClick={toggle}>
       &times;

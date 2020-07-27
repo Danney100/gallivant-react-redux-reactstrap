@@ -26,6 +26,8 @@ import Select from 'react-select'
 import AppContext from 'components/App/AppContext'
 import {
   cssHeading,
+  cssCard,
+  cssCardUpMd,
   cssBtnBase,
   cssBtnBaseUpSm,
   cssSuccessButton,
@@ -43,6 +45,7 @@ const CreateNewUser = props => {
   const useStyles = makeStyles({
     root: {
       ...cssHeading(),
+      ...cssCard(),
       ...cssInputBase(),
       ...cssBtnBase(),
       ...cssSuccessButton(),
@@ -52,6 +55,9 @@ const CreateNewUser = props => {
       [theme.breakpoints.up('sm')]: {
         ...cssBtnBaseUpSm(),
         ...cssForm2ColUpSm(),
+      },
+      [theme.breakpoints.up('md')]: {
+        ...cssCardUpMd(),
       },
       [theme.breakpoints.up('lg')]: {
         ...cssForm2ColUpLg(),
@@ -308,8 +314,8 @@ const CreateNewUser = props => {
       </div>
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <Card lg={12} md={12} sm={12} xs={12} className="pt-4 rounded-top align-items-lg-center">
-            <div className="px-3 w-100">
+          <Card lg={12} md={12} sm={12} xs={12} className="sc-card rounded-top align-items-lg-center">
+            <div className="w-100 pt-2 pt-sm-3 pt-lg-4">
               { listFormGroup }
               <FormGroup row>
                 <Label sm={3} />

@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     color: '#403839',
     fontFamily: 'SFUIText-Semibold',
   },
-  inputStyle: {
+  inpuStyle: {
     fontSize: '14px',
     color: '#adaaaa',
     fontFamily: 'SFUIText-Medium',
@@ -74,7 +74,7 @@ export const SearchCriteria = ({
                   <Col xl={{size: 1}} className="mt-2 d-flex align-items-center">
                     <Label className={`${classes.filterTitle} ml-3`}>New Filter</Label>
                   </Col>
-                  <Col xl={{size: 3}} className={`${classes.inputStyle} mt-2 rounded-circle`}>
+                  <Col xl={{size: 3}} className={`${classes.inpuStyle} mt-2 rounded-circle`}>
                     <Input type="select" innerRef={register} name="field">
                       {customerOptions.map((option, index) => {
                         return (
@@ -85,7 +85,7 @@ export const SearchCriteria = ({
                       })}
                     </Input>
                   </Col>
-                  <Col xl={{size: 3}} className={`${classes.inputStyle} mx-2 mt-2`}>
+                  <Col xl={{size: 3}} className={`${classes.inpuStyle} mx-2 mt-2`}>
                     <Input
                       type="select"
                       className={classes.radiusButton}
@@ -95,7 +95,7 @@ export const SearchCriteria = ({
                       <option value="match">Match</option>
                     </Input>
                   </Col>
-                  <Col xl={{size: 3}} className={`${classes.inputStyle} mt-2 mx-2`}>
+                  <Col xl={{size: 3}} className={`${classes.inpuStyle} mt-2 mx-2`}>
                     <Input type="text" placeholder="Value" innerRef={register} name="value" />
                   </Col>
                   <Col xl={{size: 1}} className="mt-2 mx-2 d-flex justify-content-end">

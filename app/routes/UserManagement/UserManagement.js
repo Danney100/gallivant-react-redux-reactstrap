@@ -3,7 +3,6 @@ import {
   Row,
   Col,
   Card,
-  CardBody,
   Button,
   TabContent,
   TabPane,
@@ -20,6 +19,8 @@ import { scBase } from 'styles/sc-jss-components/_variables';
 import {
   cssHeading,
   cssHeadingUpSm,
+  cssCard,
+  cssCardUpMd,
   cssInputBase,
   cssBtnBase,
   cssBtnBaseUpSm,
@@ -38,6 +39,7 @@ export const UserManagement = () => {
   const useStyles = makeStyles({
     root: {
       ...cssHeading(),
+      ...cssCard(),
       ...cssInputBase(),
       ...cssAlert(),
       ...cssTable(),
@@ -76,7 +78,14 @@ export const UserManagement = () => {
         ...cssHeadingUpSm(),
       },
       [theme.breakpoints.up('md')]: {
+        ...cssCardUpMd(),
         ...cssAlertUpMd(),
+      },
+      [theme.breakpoints.up('lg')]: {
+        '& .react-bootstrap-table-pagination': {
+          paddingLeft: '1.5625rem',
+          paddingRight: '1.5625rem',
+        },
       },
     },
     buttons: {
@@ -136,43 +145,41 @@ export const UserManagement = () => {
       </div>
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <Card lg={12} md={12} sm={12} xs={12} className="mb-3">
-            <CardBody className="px-3 pb-3 pt-1">
-              <Nav className="sc-nav-tabs sc-sfui-text-semibold">
-                <NavItem
-                  className={`sc-nav-tabs__item ${
-                    activeTab === '1' ? 'sc-nav-tabs__item--active' : ''
-                  }`}>
-                  <NavLink
-                    className="sc-nav-tabs__link"
-                    onClick={() => {
-                      toggle('1')
-                    }}>
-                    User Types
-                  </NavLink>
-                </NavItem>
-                <NavItem
-                  className={`sc-nav-tabs__item ${
-                    activeTab === '2' ? 'sc-nav-tabs__item--active' : ''
-                  }`}>
-                  <NavLink
-                    className="sc-nav-tabs__link"
-                    onClick={() => {
-                      toggle('2')
-                    }}>
-                    Users
-                  </NavLink>
-                </NavItem>
-              </Nav>
-              <TabContent activeTab={activeTab}>
-                <TabPane tabId="1">
-                  <UserTypesTable setActiveTab={setActiveTab}/>
-                </TabPane>
-                <TabPane tabId="2">
-                  <UsersTable />
-                </TabPane>
-              </TabContent>
-            </CardBody>
+          <Card lg={12} md={12} sm={12} xs={12} className="sc-card mb-3">
+            <Nav className="sc-nav-tabs sc-sfui-text-semibold">
+              <NavItem
+                className={`sc-nav-tabs__item ${
+                  activeTab === '1' ? 'sc-nav-tabs__item--active' : ''
+                }`}>
+                <NavLink
+                  className="sc-nav-tabs__link"
+                  onClick={() => {
+                    toggle('1')
+                  }}>
+                  User Types
+                </NavLink>
+              </NavItem>
+              <NavItem
+                className={`sc-nav-tabs__item ${
+                  activeTab === '2' ? 'sc-nav-tabs__item--active' : ''
+                }`}>
+                <NavLink
+                  className="sc-nav-tabs__link"
+                  onClick={() => {
+                    toggle('2')
+                  }}>
+                  Users
+                </NavLink>
+              </NavItem>
+            </Nav>
+            <TabContent activeTab={activeTab}>
+              <TabPane tabId="1">
+                <UserTypesTable setActiveTab={setActiveTab}/>
+              </TabPane>
+              <TabPane tabId="2">
+                <UsersTable />
+              </TabPane>
+            </TabContent>
           </Card>
         </Col>
       </Row>

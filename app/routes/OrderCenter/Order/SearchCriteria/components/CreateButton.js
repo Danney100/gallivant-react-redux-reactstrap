@@ -6,9 +6,9 @@ import {makeStyles} from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
   title: {
-    fontSize: '32px',
-    color: '#403839',
-    fontFamily: 'DINCondensed-Bold',
+    fontSize: '24px',
+    color: '#423b3c',
+    fontFamily: 'Oswald-Medium',
   },
 })
 
@@ -26,8 +26,12 @@ export const SearchCriteria = () => {
         <Col lg={{size: 6}} className="d-flex align-items-center">
           <p className={classes.title}>Order center</p>
         </Col>
-        <Col lg="6" className="d-flex justify-content-end mb-2">
-          <CommonButton onClick={routeChange} title="Add New Customer" buttonType="addItemButton" />
+        <Col lg="6" className="d-flex justify-content-end mb-4">
+          <CommonButton
+            onClick={routeChange}
+            title="+ Create New Order"
+            buttonType="addItemButton"
+          />
         </Col>
       </Row>
     </div>

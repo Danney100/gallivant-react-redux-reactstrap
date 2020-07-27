@@ -12,7 +12,7 @@ import {
   Input,
 } from 'reactstrap'
 import {makeStyles} from '@material-ui/core/styles'
-import iconEdit from 'images/commonIcons/edit.svg'
+import iconEdit from 'routes/components/CustomIconButton/node_modules/images/commonIcons/edit.svg'
 
 const useStyles = makeStyles({
   imageSize: {

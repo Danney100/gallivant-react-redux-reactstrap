@@ -1,110 +1,168 @@
 import React, {useContext, useEffect} from 'react'
-import {Row, Col, Card, CardBody, Label, ListGroup, CardTitle, Input} from 'reactstrap'
-import {makeStyles} from '@material-ui/core/styles'
-import PropTypes from 'prop-types'
+import {Row, Col, Card, ListGroup, CardTitle, Input, Label} from 'reactstrap'
 import AppContext from 'components/App/AppContext'
-import FilterItems from './components/FilterItems'
+import PropTypes from 'prop-types'
 import CreateButton from './components/CreateButton'
-import {customerOptions} from './options'
+import {makeStyles} from '@material-ui/core/styles'
+
+import FilterItems from './components/FilterItems'
 import CommonButton from 'routes/components/CommonButton'
+import CommonDemo from 'routes/components/CommonDemo'
 
 const useStyles = makeStyles({
-  radiusButton: {
-    borderRadius: 30,
-    backgroundColor: '#e6e0dd !important',
-  },
   title: {
-    fontSize: '22px',
-    color: '#403839',
-    fontFamily: 'DINCondensed-Bold',
+    fontSize: '16px',
+    color: '#423b3c',
+    fontFamily: 'Oswald-SemiBold',
   },
   filterTitle: {
     fontSize: '14px',
-    color: '#403839',
+    color: '#6c6766',
     fontFamily: 'SFUIText-Semibold',
   },
   inputStyle: {
     fontSize: '14px',
-    color: '#adaaaa',
+    color: '#a09d9d',
+    fontFamily: 'SFUIText-Regular',
+    backgroundColor: '#fcfaf9',
+    height: 40,
+    border: 'solid 1.5px  #a09d9d',
+    borderRadius: '6px',
+  },
+  radiusButton: {
+    borderWidth: 2,
+    borderRadius: 30,
+    backgroundColor: '#f4f0e7 !important',
+    fontSize: '14px',
+    color: '#6c6766',
     fontFamily: 'SFUIText-Medium',
+    border: 'solid  #ccb68d',
   },
 })
 
 export const SearchCriteria = ({
+  setForm,
+  handleOrderSearch,
+  resetFilters,
   register,
   applyFilter,
   handleSubmit,
   filters,
   clearFilter,
-  resetFilters,
-  handleSearch,
 }) => {
   const classes = useStyles()
   const context = useContext(AppContext)
   const {setTitle} = context
 
   useEffect(() => {
-    setTitle('Customer Center')
+    setTitle('Order Center')
   }, [])
 
+  const OrderInfo = [
+    {label: 'Select', value: 'customer.select'},
+    {label: 'Is Host Ordeer', value: 'customer.IsHostOrder'},
+    {label: 'Order Customer ID', value: 'customer.OrderCustomID'},
+    {label: 'Order Customer Username', value: 'customer.name'},
+    {label: 'Order Customer Email', value: 'customer.email'},
+    {label: 'Address City', value: 'shipping_address.city'},
+    {label: 'Address Company Name', value: 'shipping_address.company_name'},
+    {label: 'Address Country', value: 'shipping_address.country'},
+    {label: 'Address First Name', value: 'shipping_address.first_name'},
+    {label: 'Address Last Name', value: 'shipping_address.last_name'},
+    {label: 'Address Phone Number', value: 'shipping_address.phone_number'},
+    {label: 'Address Postal Code', value: 'shipping_address.postcode'},
+    {label: 'Address Province', value: 'shipping_address.county'},
+    {label: 'Address Street 1', value: 'shipping_address.line_1'},
+    {label: 'Address Street 2', value: 'shipping_address.line_2'},
+    {label: 'Order Commissionable', value: 'commissionable'},
+    {label: 'Order Consultant ID', value: 'customer.data.id'},
+    {label: 'Order Date', value: 'timestamps.created_at'},
+    {label: 'Order ID', value: 'id'},
+    {label: 'Order Locked', value: 'locked'},
+    {label: 'Order Payment Status ID', value: 'payment'},
+    {label: 'Original Order ID', value: 'id'},
+    {label: 'Shipment Status', value: 'shipping'},
+    {label: 'Taxable Total', value: 'meta.display_price.with_tax.amount'},
+    {label: 'Total', value: 'meta.display_price.tax.amount'},
+  ]
+
+  const handleFieldChange = (selectedOption) => {
+    setForm((prevState) => {
+      return {
+        ...prevState,
+        field: selectedOption.value,
+      }
+    })
+  }
+
   return (
-    <div>
+    <div className="p-3">
       <CreateButton />
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <Card lg={12} md={12} sm={12} xs={12} className="mb-3">
-            <CardBody className="py-3 text-white rounded-top mx-2 border-bottom">
-              <CardTitle tag="h5" className="mb-0 d-flex justify-content-between">
+          <Card lg={12} md={12} sm={12} xs={12} className="mb-4">
+            <div className=" ml-4 mr-4 mt-4 mb-2 border-bottom">
+              <CardTitle tag="h5">
                 <div>
-                  <span className={classes.title}>Search Criteria</span>
+                  <span className={classes.title}>Criteria</span>
                 </div>
               </CardTitle>
-            </CardBody>
-            <div>
-              <ListGroup>
-                <Row lg={12} md={12} sm={12} xs={12} form className="mx-2 pb-4 border-bottom">
-                  <Col xl={{size: 1}} className="mt-2 d-flex align-items-center">
-                    <Label className={`${classes.filterTitle} ml-3`}>New Filter</Label>
-                  </Col>
-                  <Col xl={{size: 3}} className={`${classes.inputStyle} mt-2 rounded-circle`}>
-                    <Input type="select" innerRef={register} name="field">
-                      {customerOptions.map((option, index) => {
-                        return (
-                          <option key={index} value={option.value}>
-                            {option.label}
-                          </option>
-                        )
-                      })}
-                    </Input>
-                  </Col>
-                  <Col xl={{size: 3}} className={`${classes.inputStyle} mx-2 mt-2`}>
-                    <Input
-                      type="select"
-                      className={classes.radiusButton}
-                      innerRef={register}
-                      name="operator">
-                      <option value="wildcard">Contains</option>
-                      <option value="match">Is In</option>
-                    </Input>
-                  </Col>
-                  <Col xl={{size: 3}} className={`${classes.inputStyle} mt-2 mx-2`}>
-                    <Input type="text" placeholder="Value" innerRef={register} name="value" />
-                  </Col>
-                  <Col xl={{size: 1}} className="mt-2 mx-2 d-flex justify-content-end">
-                    <CommonButton
-                      onClick={handleSubmit(applyFilter)}
-                      title="Add Filter"
-                      buttonType="filterButton"
-                    />
-                  </Col>
-                </Row>
-              </ListGroup>
             </div>
+            <ListGroup className="">
+              <CommonDemo
+                content="The search feature allows users to search based on various fields that are associated with chosen center. This search feature allows users to run generic searches or if desired they can build complex queries with dependent and smart operators."
+                contentOne="Feature Guide Link "
+                contentTwo={<i className="fa fas fa-long-arrow-right"></i>}
+              />
+              <Row lg={12} md={12} sm={12} xs={12} form className="mx-2 pb-4 border-bottom">
+                <Col xl={{size: 1}} className="mt-2 d-flex align-items-center">
+                  <Label className={`${classes.filterTitle} ml-3`}>New Filter</Label>
+                </Col>
+                <Col xl={{size: 3}} className={`${classes.inputStyle} mt-2 mr-2`}>
+                  <Input
+                    type="select"
+                    innerRef={register}
+                    name="field"
+                    onChange={handleFieldChange}>
+                    {OrderInfo.map((option, index) => {
+                      return (
+                        <option key={index} value={option.value}>
+                          {option.label}
+                        </option>
+                      )
+                    })}
+                  </Input>
+                </Col>
+                <Col xl={{size: 3}} className={`${classes.CircleStyle} mt-2 rounded-circle`}>
+                  <Input
+                    innerRef={register}
+                    type="select"
+                    name="operator"
+                    className={classes.radiusButton}>
+                    <option value="Contains">Contains</option>
+                    <option value="Is">Is</option>
+                    <option value="Does Not Contain">Does Not Contain</option>
+                    <option value="Starts With">Starts With</option>
+                  </Input>
+                </Col>
+                <Col xl={{size: 3}} className={`${classes.inputStyle} mt-2 mx-2`}>
+                  <Input type="text" placeholder="Enter Value" innerRef={register} name="value" />
+                </Col>
+                <Col xl={{size: 1}} className="mt-2 mx-2 d-flex justify-content-end">
+                  <CommonButton
+                    onClick={handleSubmit(applyFilter)}
+                    title="Add Filter"
+                    buttonType="filterButton"
+                  />
+                </Col>
+              </Row>
+              <FilterItems filters={filters} clearFilter={clearFilter} />
+            </ListGroup>
           </Card>
           <Row>
             <Col className="mb-3 d-flex justify-content-end">
               <CommonButton onClick={resetFilters} title="Reset" buttonType="cancelButton" />
-              <CommonButton onClick={handleSearch} title="Search" buttonType="saveButton" />
+              <CommonButton onClick={handleOrderSearch} title="Search" buttonType="addItemButton" />
             </Col>
           </Row>
         </Col>
@@ -114,13 +172,15 @@ export const SearchCriteria = ({
 }
 
 SearchCriteria.propTypes = {
+  form: PropTypes.object,
+  setForm: PropTypes.func,
+  handleOrderSearch: PropTypes.func,
   register: PropTypes.func,
   applyFilter: PropTypes.func,
   handleSubmit: PropTypes.func,
   filters: PropTypes.array,
   clearFilter: PropTypes.func,
   resetFilters: PropTypes.func,
-  handleSearch: PropTypes.func,
 }
 
 export default SearchCriteria

@@ -3,7 +3,7 @@ import {Col, Row, Modal, ModalBody, ModalHeader, Form, FormGroup, Label, Input} 
 import {makeStyles} from '@material-ui/core/styles'
 import CommonButton from 'routes/components/CommonButton'
 import CommonDemo from 'routes/components/CommonDemo'
-import iconEdit from 'images/commonIcons/edit.svg'
+import iconEdit from 'routes/components/CustomIconButton/node_modules/images/commonIcons/edit.svg'
 
 const useStyles = makeStyles({
   imageSize: {

@@ -1,163 +1,139 @@
 import React from 'react'
-import {Row, Col, Input, FormGroup, Label, Button} from 'reactstrap'
-import BootstrapTable from 'react-bootstrap-table-next'
+import {Row, Table} from 'reactstrap'
+import iconDelete from 'images/commonIcons/trash.svg'
+import iconDetails from 'images/commonIcons/details.svg'
+import {makeStyles} from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+  imageSize: {
+    height: 15,
+    width: 15,
+    marginLeft: 3.5,
+  },
+  imageSizeRemove: {
+    height: 16,
+    width: 16,
+    marginLeft: 3.5,
+  },
+  imgSize: {
+    width: 25,
+    height: 25,
+    borderRadius: 50,
+    backgroundColor: '#E6E0DD',
+  },
+  imgSizeDetails: {
+    width: 22,
+    height: 22,
+    borderRadius: 50,
+    backgroundColor: '#E6E0DD',
+  },
+  theadFont: {
+    fontFamily: 'SFUIText-Semibold',
+    color: '#403839',
+    fontSize: 14,
+  },
+  tbodyFont: {
+    fontFamily: 'SFUIText-Medium',
+    color: '#6c6766',
+    fontSize: 14,
+  },
+})
 
 const OrderItems = () => {
-  const actionFormater = () => {
-    return (
-      <Row className="p-2">
-        <Button color="success">
-          <i className="fa fa-fw fa-eye" color="info" aria-hidden="true"></i>Details and Join
-        </Button>
-        <Button color="warning" className="mt-1">
-          <i className="fa fa-fw fa-trash" aria-hidden="true"></i>Remove
-        </Button>
-      </Row>
-    )
-  }
-  const columns = [
-    {
-      dataField: 'sku',
-      text: 'SKU',
-      sort: true,
-    },
-    {
-      dataField: 'name',
-      text: 'Name',
-      sort: true,
-    },
-    {
-      dataField: 'price',
-      text: 'Price',
-      sort: true,
-    },
-    {
-      dataField: 'qty',
-      text: 'Qty',
-      sort: true,
-    },
-    {
-      dataField: 'subTotal',
-      text: 'Subtotal',
-      sort: true,
-    },
-    {
-      dataField: 'shipping',
-      text: 'Shipping',
-      sort: true,
-    },
-    {
-      dataField: 'tax',
-      text: 'Estimated Sales Tax',
-      sort: true,
-    },
-    {
-      dataField: 'discounts',
-      text: 'Discounts',
-      sort: true,
-    },
-    {
-      dataField: 'total',
-      text: 'Total',
-      sort: true,
-    },
-    {
-      dataField: 'qv',
-      text: 'QV',
-      sort: true,
-    },
-    {
-      dataField: 'cv',
-      text: 'CV',
-      sort: true,
-    },
-    {
-      dataField: 'rv',
-      text: 'RV',
-      sort: true,
-    },
-    {
-      dataField: 'status',
-      text: 'Status',
-      sort: true,
-    },
-    {dataField: 'df1', isDummyField: true, text: 'Actions', formatter: actionFormater},
-  ]
-  const data = [
-    {
-      id: 1,
-      sku: 'White302',
-      name: 'NV Ticklebumps Brut, North Coast, California',
-      price: '$45.00',
-      qty: 2,
-      subTotal: '$90.00',
-      shipping: '$11.67',
-      tax: '$4.58',
-      discounts: '$0.00',
-      total: '$106.25',
-      qv: '90.00',
-      cv: '63.00',
-      rv: '90.00',
-      status: 'open',
-    },
-  ]
-
+  const classes = useStyles()
   return (
     <div>
-      <Row className="mt-2">
-        <Col sm={12} lg={12} xs={12}>
-          <FormGroup row className="text-black justify-content-lg-end justify-content-center">
-            <Label className="my-auto">Qty</Label>
-            <Col lg={2} xs={8} className="mb-1">
-              <Input type="number" step="1" />
-            </Col>
-            <Col lg={2} xs={8} className="mb-1">
-              <Input placeholder="Item SKU/Name" />
-            </Col>
-            <Col lg={2} xs={8} className="mb-1 text-center p-0">
-              <Button>
-                <i className="fa fa-fw fa-shopping-cart" aria-hidden="true" />
-                Quick Add Item
-              </Button>
-            </Col>
-          </FormGroup>
-        </Col>
-      </Row>
-      <BootstrapTable
-        keyField="id"
-        columns={columns}
-        data={data}
-        classes="table-responsive text-black"
-      />
-      <Row className="mt-3">
-        <Col sm={2} xs={12} className="text-lg-left text-center">
-          <Button className="mr-1" color="warning">
-            <i className="fa fas fa-ban mr-1"></i>
-            <span>Cancel</span>
-          </Button>
-        </Col>
-        <Col
-          sm={10}
-          xs={12}
-          style={{
-            top: '7px',
-            height: 'fit-content',
-          }}
-          className="text-lg-right text-center p-0 pr-2">
-          <Button className="mr-1 mb-1" color="info">
-            <i className="fa fas fa-calculator mr-1" />
-            Recalculate Tax Only
-          </Button>
-          <Button className="mr-1 mb-1" color="secondary">
-            <i className="fa fas fa-calculator mr-1" />
-            <span>Recalculate Order</span>
-          </Button>
-          <Button className="mr-1 mb-1" color="success">
-            <i className="fa fa-check-circle-o mr-1" />
-            Save
-          </Button>
-        </Col>
-      </Row>
+      <Table responsive striped>
+        <thead className={classes.theadFont}>
+          <tr>
+            <th>
+              <span className="ml-2">SKU</span>
+            </th>
+            <th>
+              <span>Name</span>
+            </th>
+            <th>
+              <span>Price</span>
+            </th>
+            <th>
+              <span>Qty</span>
+            </th>
+            <th>
+              <span>Subtotal</span>
+            </th>
+            <th>
+              <span>Shipping</span>
+            </th>
+            <th>
+              <span>Estimated Sails Tax</span>
+            </th>
+            <th>
+              <span>Discounts</span>
+            </th>
+            <th>
+              <span>Total</span>
+            </th>
+            <th>
+              <span>QV</span>
+            </th>
+            <th>
+              <span>CV</span>
+            </th>
+            <th>
+              <span>RV</span>
+            </th>
+            <th>
+              <span>Status</span>
+            </th>
+            <th>
+              <span>Actions</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className={classes.tbodyFont}>14KMixS20</td>
+            <td className={classes.tbodyFont}>14K Mix Pack</td>
+            <td className={classes.tbodyFont}>$25.00</td>
+            <td className={classes.tbodyFont}>1</td>
+            <td className={classes.tbodyFont}>$25.00</td>
+            <td className={classes.tbodyFont}>$22.00</td>
+            <td className={classes.tbodyFont}>$2.12</td>
+            <td className={classes.tbodyFont}>$0.00</td>
+            <td className={classes.tbodyFont}>$49.12</td>
+            <td className={classes.tbodyFont}>25.00</td>
+            <td className={classes.tbodyFont}>17.50</td>
+            <td className={classes.tbodyFont}>25.00</td>
+            <td className={classes.tbodyFont}>Open</td>
+            <td>
+              <div>
+                <Row>
+                  <span>
+                    <div className={classes.imgSize}>
+                      <img src={iconDetails} className={classes.imageSize} />
+                    </div>
+                  </span>
+                  <span>
+                    <div className={classes.tbodyFont}>Details and Join</div>
+                  </span>
+                </Row>
+              </div>
+              <div>
+                <Row>
+                  <span>
+                    <div className={classes.imgSize}>
+                      <img src={iconDelete} className={classes.imageSizeRemove} />
+                    </div>
+                  </span>
+                  <span>
+                    <div className={classes.tbodyFont}>Remove</div>
+                  </span>
+                </Row>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
     </div>
   )
 }

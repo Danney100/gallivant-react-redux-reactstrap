@@ -17,7 +17,7 @@ import {
 } from 'reactstrap'
 import {makeStyles} from '@material-ui/core/styles'
 import {CustomSearch} from 'routes/Tables/ExtendedTable/components'
-import iconEdit from 'images/commonIcons/edit.svg'
+import iconEdit from 'routes/components/CustomIconButton/node_modules/images/commonIcons/edit.svg'
 import iconDelete from 'images/commonIcons/delete.svg'
 import CommonButton from 'routes/components/CommonButton'
 
@@ -232,12 +232,12 @@ const NoteTable = () => {
               <td>
                 <div color="link" className={classes.buttonSize}>
                   <Row>
-                    <Col>
+                    <Col className="md-4">
                       <div className={classes.imgSize}>
                         <img src={iconEdit} className={classes.imageSize} />
                       </div>
                     </Col>
-                    <Col>Edit</Col>
+                    <Col className="md-8">Edit</Col>
                   </Row>
                 </div>
                 <div color="link" className={classes.buttonSize}>

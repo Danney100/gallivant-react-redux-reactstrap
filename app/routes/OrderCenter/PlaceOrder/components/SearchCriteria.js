@@ -170,7 +170,7 @@ export const SearchCriteria = (props) => {
         <div className="text-left" style={{padding: '0.5rem 0rem'}}>
           <Button onClick={routeChange} color="spotify">
             <i className="fa fa-plus mr-2"></i>
-            Create New Order
+            Add New Order
           </Button>
         </div>
       </div>

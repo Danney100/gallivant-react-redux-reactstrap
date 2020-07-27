@@ -10,13 +10,23 @@ const useStyles = makeStyles({
     color: '#6c6766',
     fontSize: '14px',
     fontWeight: 500,
+    border: 'solid  #ccb68d',
+    fontFamily: 'SFUIText-Regular',
   },
   label: {
     backgroundColor: '#f7f7f7',
-    color: '#6c6766',
+    color: '#423b3c',
     fontSize: '14px',
+    fontFamily: 'SFUIText-Regular',
     fontWeight: 500,
     borderRadius: '4px',
+    border: 'solid 1.5px  #a09d9d',
+  },
+  times: {
+    backgroundColor: '#e6e0dd',
+    color: '#423b3c',
+    fontFamily: 'SFUIText-Regular',
+    fontSize: '14px',
   },
 })
 
@@ -27,11 +37,10 @@ export const SearchCriteria = ({filters, clearFilter}) => {
     <div className="mt-2 mb-2">
       {filters.map((filter) => {
         return (
-          <Row form className="mx-2 mb-2" key={filter.id}>
+          <Row form className="mb-2" key={filter.id}>
             <Col sm={{size: 'auto', offset: 1}} className="text-center">
               <Button
-                color="light"
-                className="rounded-circle"
+                className={`${classes.times} rounded-circle`}
                 onClick={() => clearFilter(filter.id)}>
                 <i className="fa fas fa-times"></i>
               </Button>

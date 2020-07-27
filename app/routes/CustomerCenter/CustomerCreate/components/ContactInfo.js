@@ -78,12 +78,10 @@ const ContactInfo = (props) => {
   const classes = useStyles()
   return (
     <Card className="mb-3">
-      <div tag="h5">
-        <p className={classes.name}>
-          Contact Information
-          <hr className={classes.border} />
-        </p>
+      <div tag="h5" className="mb-0">
+        <p className={`${classes.name} mb-0`}>Contact Information</p>
       </div>
+      <hr className={`${classes.border} mx-4 mt-2`} />
       <div>
         <Row form>
           <Col md={{size: 4, offset: 2}}>
@@ -223,9 +221,7 @@ const ContactInfo = (props) => {
                   name="phone"
                   defaultValue=""
                   innerRef={register}
-                  className={classes.phone}>
-                  <option>972-876-9292</option>
-                </Input>
+                  className={classes.phone}></Input>
               </FormGroup>
             </Col>
           </Row>

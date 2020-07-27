@@ -1,67 +1,21 @@
 import React from 'react'
-import {Collapse, FormGroup, Col, Label, Button} from 'reactstrap'
-import {makeStyles} from '@material-ui/core/styles'
-import Select from 'react-select'
+import {
+  Collapse,
+  FormGroup,
+  CustomInput,
+  Button,
+} from 'components'
 import PropTypes from 'prop-types'
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    backgroundColor: '#3f4651',
-    padding: '10px 15px',
-    marginTop: '10px',
-  },
-  open: {
-    borderTopLeftRadius: '0.25rem',
-    borderTopRightRadius: '0.25rem',
-  },
-  close: {
-    borderRadius: '0.25rem',
-  },
-  collapse: {
-    '& label': {
-      fontSize: '14px',
-      color: ' #423b3c',
-      fontWeight: 700,
-      lineHeight: 2,
-    },
-    border: '1px solid #dee2e6',
-    borderBottomLeftRadius: '0.25rem',
-    borderBottomRightRadius: '0.25rem',
-  },
-}))
-
-const FieldGroup = ({label, fields, index, open, setOpen}) => {
-  const classes = useStyles()
-  const customStyles = {
-    option: (provided, state) => ({
-      ...provided,
-      color: state.isSelected ? 'white' : '#3f4651',
-      backgroundColor: state.isSelected ? '#3f4651' : '#f8f9fa',
-    }),
-    control: (provided) => ({
-      ...provided,
-      marginTop: '0%',
-      borderRadius: '0.25rem',
-      border: '1px solid #dee2e6',
-      backgroundColor: '#f8f9fa',
-    }),
-    menu: (provided) => ({
-      ...provided,
-      backgroundColor: '#f8f9fa',
-    }),
-    valueContainer: (provided) => ({
-      ...provided,
-      borderRadius: '0.25rem',
-      backgroundColor: '#f8f9fa',
-    }),
-    indicatorsContainer: (provided) => ({
-      ...provided,
-      borderRadius: '0.25rem',
-      backgroundColor: '#f8f9fa',
-    }),
-  }
+const FieldGroup = ({
+  label,
+  fields,
+  index,
+  menuOpen,
+  setMenuOpen,
+  optionsOpen,
+  setOptionsOpen,
+}) => {
   const options = [
     {
       label: 'No Access',
@@ -76,53 +30,134 @@ const FieldGroup = ({label, fields, index, open, setOpen}) => {
       value: 3,
     },
   ]
+  const optionFields = [
+  'consultant Company Name',
+  'legalEntity Company Name',
+  'consultant Contact Info',
+  'consultant Display ID',
+  'legalEntity Display ID',
+  'consultant Email',
+  'legalEntity Email',
+  'consultant First Name',
+  'legalEntity First Name',
+  'consultant Joint First Name',
+  'legalEntity Joint First Name',
+  'consultant Joint Last Name',
+  'legalEntity Joint Last Name',
+  'consultant Joint Middle Name',
+  'legalEntity Joint Middle Name',
+  'consultant Last Name',
+  'legalEntity Last Name',
+  'consultant Last Name 2',
+  'legalEntity Last Name 2',
+  ]
 
-  const toggle = () => {
-    if (open === index) {
-      setOpen(null)
+  const regex = /[\s/]/g
+
+  const toggleMenu = e => {
+    e.preventDefault();
+    if (menuOpen === index) {
+      setMenuOpen(null)
     } else {
-      setOpen(index)
+      setMenuOpen(index)
     }
   }
+
+  const toggleItem = (e, fieldIndex) => {
+    e.preventDefault();
+    setOptionsOpen(`${index}-${fieldIndex}`);
+  }
+
+  const radioId = (label, field, option) => {
+    const newLabel = label.replace(regex, '')
+    const newField = field.replace(regex, '')
+    const newOption = option ? option.replace(regex, '') : null
+    if (option) {
+      return `${newLabel}_${newField}_${newOption}`
+    } else {
+      return `${newLabel}_${newField}_option`
+    }
+  }
+
   return (
-    <>
-      <div className={`${open === index ? classes.open : classes.close} ${classes.root}`}>
-        <span className="big ml-1 text-white">{label}</span>
-        <div className="d-flex" onClick={() => toggle()}>
-          <i
-            className={open === index ? 'fa far fa-angle-up' : 'fa far fa-angle-down'}
-            style={{color: 'white', cursor: 'pointer'}}></i>
-        </div>
-      </div>
-      <Collapse isOpen={open === index} className={classes.collapse}>
-        {fields.map((field, index) => {
+    <div className="sc-field-group-wrapper">
+      <Button
+        className={`
+          sc-collapse-menu d-flex align-items-center justify-content-between sc-sfui-text-semibold
+          ${menuOpen === index ? 'open' : ''}
+        `}
+        color="link"
+        onClick={ toggleMenu }
+      >
+        <span className="sc-collapse-label">{ label }</span>
+        <i className={`
+            sc-collapse-arrow
+            ${menuOpen === index ? 'fa far fa-angle-up' : 'fa far fa-angle-down'}
+          `}
+        />
+      </Button>
+      <Collapse isOpen={menuOpen === index} className="sc-collapse-panel">
+        {fields.map((field, fieldIndex) => {
           return (
-            <FormGroup key={index} row>
-              <Col sm={3}>
-                <Label>{field}</Label>
-              </Col>
-              <Col sm={2}>
-                <Select styles={customStyles} options={options} />
-              </Col>
-              <Col sm={2}>
-                <Button color="info" className="mt-2 mt-lg-0">
-                  <i className="fa fa-fw fa-eye"></i> View Fields
-                </Button>
-              </Col>
-            </FormGroup>
+            <div key={ fieldIndex }>
+              <Button
+                className={`
+                  sc-collapse-menu-lv2 w-100 sc-sfui-text-semibold text-left border-0
+                  ${optionsOpen === `${index}-${fieldIndex}` ? 'open' : ''}
+                `}
+                color="link"
+                onClick={e => toggleItem(e, fieldIndex)}
+              >
+                <span className="sc-collapse-menu-lv2__line"></span>
+                <span>{field}</span>
+              </Button>
+              <div className={`
+                  sc-collapse-panel-lv2 my-2 px-4 w-100
+                  ${optionsOpen === `${index}-${fieldIndex}` ? 'd-block' : 'd-none'}
+                `}>
+                <h2 className="sc-heading d-none d-lg-block">{ field }</h2>
+                <FormGroup className="mb-0">
+                  {
+                    options.map((option, optionIndex) => {
+                      return (
+                        <CustomInput
+                          key={ optionIndex }
+                          type="radio"
+                          id={ radioId(label, field, option.label) }
+                          name={ radioId(label, field) }
+                          label={ option.label }
+                        />
+                    )})
+                  }
+                </FormGroup>
+                <div className="sc-collapse-panel-lv2__col3 px-md-4 w-100">
+                  <h2 className="sc-heading d-none d-lg-block">Fields</h2>
+                  <ul className="list-unstyled">
+                    {
+                      optionFields.map((field, index) => {
+                        return (
+                          <li key={ index }>{ `- ${field}` }</li>
+                      )})
+                    }
+                  </ul>
+                </div>
+              </div>
+            </div>
           )
         })}
       </Collapse>
-    </>
+    </div>
   )
 }
 
 FieldGroup.propTypes = {
   label: PropTypes.string,
-  fields: PropTypes.object,
+  fields: PropTypes.array,
   index: PropTypes.number,
-  open: PropTypes.oneOfType[(PropTypes.object, PropTypes.number)],
-  setOpen: PropTypes.func,
+  menuOpen: PropTypes.number,
+  setMenuOpen: PropTypes.func,
+  optionsOpen: PropTypes.string,
+  setOptionsOpen: PropTypes.func,
 }
 
 export default FieldGroup

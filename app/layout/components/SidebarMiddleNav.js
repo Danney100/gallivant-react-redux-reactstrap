@@ -9,6 +9,8 @@ import productConfig from 'images/menuIcons/productConfig.svg'
 import order from 'images/menuIcons/order.svg'
 import home from 'images/menuIcons/home.svg'
 import userMng from 'images/menuIcons/userMng.svg'
+import wallet from 'images/menuIcons/wallet.svg'
+import tasting from 'images/menuIcons/tasting.svg'
 import consultantActive from 'images/menuIcons/consultantActive.svg'
 import customerActive from 'images/menuIcons/customerActive.svg'
 import homeActive from 'images/menuIcons/homeActive.svg'
@@ -19,6 +21,8 @@ import reportActive from 'images/menuIcons/reportActive.svg'
 import userMngActive from 'images/menuIcons/userMngActive.svg'
 import shippingfast from 'images/menuIcons/shippingfast.svg'
 import shippingActive from 'images/menuIcons/shippingActive.svg'
+import walletActive from 'images/menuIcons/walletActive.svg'
+import tastingActive from 'images/menuIcons/tastingActive.svg'
 
 export const SidebarMiddleNav = () => {
   return (
@@ -86,6 +90,20 @@ export const SidebarMiddleNav = () => {
         <SidebarMenu.Item title="Trigger Options" to="/rewards/trigger-option-manager" exact />
         <SidebarMenu.Item title="Gift Cards" to="/products/gift-card-manager" exact />
       </SidebarMenu.Item>
+      <SidebarMenu.Item
+        icon={<img src={wallet} alt="" />}
+        activeIcon={<img src={walletActive} alt="" />}
+        title="Compensation">
+        <SidebarMenu.Item title="Compensation Runs" to="/compensation/compensation-run" exact />
+        <SidebarMenu.Item title="View Compensation" to="/compensation/view-compensation" exact />
+        <SidebarMenu.Item title="Sky Wallet Payouts" to="/compensation/sky-wallet-payouts" exact />
+      </SidebarMenu.Item>
+      <SidebarMenu.Item
+        icon={<img src={tasting} alt="" />}
+        activeIcon={<img src={tastingActive} alt="" />}
+        title="Tastings"
+        to="/tastings/new-order/checkout"
+      />
       <SidebarMenu.Item
         icon={<img src={shippingfast} alt="" />}
         activeIcon={<img src={shippingActive} alt="" />}

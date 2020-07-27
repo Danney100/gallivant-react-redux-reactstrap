@@ -1,82 +1,77 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import ReCAPTCHA from 'react-google-recaptcha'
+import {makeStyles} from '@material-ui/styles'
+import {Form, FormGroup, Input, Button, Label, EmptyLayout, Col, Row} from 'components'
 
-import {
-  Form,
-  FormGroup,
-  FormText,
-  Input,
-  Button,
-  Label,
-  EmptyLayout,
-  ThemeConsumer,
-} from 'components'
+import {HeaderAuth} from 'routes/components/Pages/HeaderAuth'
+import ScoutImage from '../ScoutImage'
 
-import {HeaderAuth} from '../../components/Pages/HeaderAuth'
-import {FooterAuth} from '../../components/Pages/FooterAuth'
+const useStyles = makeStyles({
+  root: {
+    marginLeft: '-1.68em',
+    '& .imgCol': {
+      position: 'relative',
+    },
+  },
+  input: {
+    color: '#a09d9d',
+    backgroundColor: '#f7f7f7',
+    borderRadius: ' 2px',
+    border: 'solid 1px #a09d9d',
+  },
+  button: {borderRadius: '5px', backgroundColor: '#423b3c', fontSize: '16px', fontWeight: 500},
+})
 
 const ForgotPassword = () => {
+  const classes = useStyles()
   const recaptchaRef = React.useRef()
   const onSubmitWithReCAPTCHA = async () => {
     const token = await recaptchaRef.current.executeAsync()
   }
-  return (
-    <EmptyLayout>
-      <EmptyLayout.Section center>
-        {/* START Header */}
-        <HeaderAuth title="Forgot Password" />
-        {/* END Header */}
-        {/* START Form */}
-        <form onSubmit={onSubmitWithReCAPTCHA}>
-          <ReCAPTCHA ref={recaptchaRef} size="visible" sitekey="Your client site key" />
-        </form>
 
-        <Form className="mb-3">
-          <FormGroup>
-            <Label for="emailAdress">Email Adress or Username</Label>
-            <Input
-              type="email"
-              name="email"
-              id="emailAdress"
-              placeholder="Enter..."
-              className="bg-white"
-            />
-            <FormText color="muted">We&amp;ll never share your email with anyone else.</FormText>
-          </FormGroup>
-          <div className="d-flex">
-            <ThemeConsumer>
-              {({color}) => (
-                <Button color={color} tag={Link} to="/" className="align-self-center">
-                  Reset Password
-                </Button>
-              )}
-            </ThemeConsumer>
-            <Button
-              color="link"
-              tag={Link}
-              to="/"
-              className="align-self-center ml-auto pr-0 text-decoration-none">
-              <i className="fa fa-angle-left mr-2"></i> Back to Home
-            </Button>
-          </div>
-        </Form>
-        {/* END Form */}
-        {/* START Bottom Links */}
-        <div className="d-flex mb-5">
-          <Link to="/pages/login" className="text-decoration-none">
-            Login
-          </Link>
-          <Link to="/pages/register" className="ml-auto text-decoration-none">
-            Register
-          </Link>
-        </div>
-        {/* END Bottom Links */}
-        {/* START Footer */}
-        <FooterAuth />
-        {/* END Footer */}
-      </EmptyLayout.Section>
-    </EmptyLayout>
+  return (
+    <Row className={classes.root}>
+      <ScoutImage />
+      <Col>
+        <EmptyLayout>
+          <EmptyLayout.Section center>
+            <HeaderAuth title="Forgot Password" />
+            <p className="h3 font-weight-bold">Forgot Your Password?</p>
+            <p>Enter your email.</p>
+            <Form className="mb-3">
+              <FormGroup>
+                <Label for="emailAdress" className="h6 inputLabel font-weight-bold">
+                  Username
+                </Label>
+                <Col sm={10} className="p-0">
+                  <Input
+                    type="email"
+                    name="email"
+                    id="emailAdress"
+                    placeholder="Username"
+                    className={classes.input}
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup onSubmit={onSubmitWithReCAPTCHA}>
+                <ReCAPTCHA
+                  className="g-recaptcha"
+                  ref={recaptchaRef}
+                  sitekey="6LeIfSUUAAAAAIVrphLRVDmMIGfuNhzEIhSd2tL5"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Col sm={10} className="p-0">
+                  <Button className={`${classes.button} border-0`} block>
+                    EMAIL LINK
+                  </Button>
+                </Col>
+              </FormGroup>
+            </Form>
+          </EmptyLayout.Section>
+        </EmptyLayout>
+      </Col>
+    </Row>
   )
 }
 

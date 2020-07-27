@@ -5,7 +5,7 @@ import {Row, Col, Button} from 'components'
 import {CustomSearch} from 'routes/Tables/ExtendedTable/components'
 import {useHistory} from 'react-router'
 import paginationFactory from 'react-bootstrap-table2-paginator'
-import iconEdit from 'images/commonIcons/edit.svg'
+import iconEdit from 'routes/components/CustomIconButton/node_modules/images/commonIcons/edit.svg'
 
 const UsersTable = () => {
   const history = useHistory()
@@ -117,7 +117,7 @@ const UsersTable = () => {
               <CustomSearch {...props.searchProps}/>
             </div>
           </div>
-          <Row className="mt-3">
+          <Row className="sc-card__full-row mt-3">
             <Col sm={12} className="p-0">
               <BootstrapTable
                 keyField="id"

@@ -1,86 +1,100 @@
 import React from 'react'
-import {Collapse, FormGroup, Col, Label, Button, Input} from 'reactstrap'
-import {makeStyles} from '@material-ui/core/styles'
-import Select from 'react-select'
+import {FormGroup, Button, CustomInput} from 'reactstrap'
 import PropTypes from 'prop-types'
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    backgroundColor: '#3f4651',
-    padding: '10px 15px',
-    marginTop: '10px',
-  },
-  open: {
-    borderTopLeftRadius: '0.25rem',
-    borderTopRightRadius: '0.25rem',
-  },
-  close: {
-    borderRadius: '0.25rem',
-  },
-  collapse: {
-    '& label': {
-      fontSize: '12px',
-      color: ' #423b3c',
-      fontWeight: 700,
-      lineHeight: 2,
-    },
-    border: '1px solid #dee2e6',
-    borderBottomLeftRadius: '0.25rem',
-    borderBottomRightRadius: '0.25rem',
-  },
-}))
-
-const ModuleGroup = ({label, fields, index, open, setOpen}) => {
-  const classes = useStyles()
-
-  const toggle = () => {
-    if (open === index) {
-      setOpen(null)
-    } else {
-      setOpen(index)
-    }
+const ModuleGroup = ({label, fields, index, open, setOpen, checkAll, setCheckAll}) => {
+  const regex = /[\s/]/g
+  const checkboxId = (label, field) => {
+    const newLabel = label.replace(regex, '')
+    const newField = field.replace(regex, '')
+    return `${newLabel}_${newField}`
   }
+
+  const checkAllModules = e => {
+    let newCheckAll = checkAll;
+    let fields = newCheckAll[index].fields;
+
+    newCheckAll[index].isChecked = e.target.checked;
+    for (let field of fields) {
+      field.isChecked = e.target.checked;
+    }
+
+    setCheckAll(newCheckAll);
+  }
+
+  const showItems = () => {
+    setOpen(index)
+  }
+
+  const responseCheckAll = (e, fieldIndex) => {
+    let newCheckAll = checkAll;
+    let checkedCounter = 0;
+    newCheckAll[index].fields[fieldIndex].isChecked = e.target.checked;
+
+    for (let field of newCheckAll[index].fields) {
+      if (field.isChecked) checkedCounter++
+    }
+
+    newCheckAll[index].isChecked = newCheckAll[index].fields.length === checkedCounter;
+
+    setCheckAll(newCheckAll);
+  }
+
   return (
-    <>
-      <div className={`${open === index ? classes.open : classes.close} ${classes.root}`}>
-        <span className="big ml-1" style={{color: 'white'}}>
-          <FormGroup check>
-            <Label check>
-              <Input type="checkbox" /> {label}
-            </Label>
-          </FormGroup>
-        </span>
-        <div className="d-flex" onClick={() => toggle()}>
-          <i
-            className={open === index ? 'fa far fa-angle-up' : 'fa far fa-angle-down'}
-            style={{color: 'white', cursor: 'pointer'}}></i>
-        </div>
+    <div className="sc-module-group-wrapper">
+      <div className="d-flex align-items-center sc-sfui-text-semibold">
+        <FormGroup className="mb-0">
+          <CustomInput
+            type="checkbox"
+            className="sc-module-group-checkbox"
+            id={ `fieldGroup-${index}` }
+            onChange={ checkAllModules }
+          />
+        </FormGroup>
+        <Button
+          className={`
+            sc-collapse-menu sc-module-group-btn d-flex align-items-center justify-content-between
+            ${open === index ? 'open' : ''}
+          `}
+          color="link"
+          onClick={ showItems }
+        >
+          <span className="sc-collapse-label text-left pr-2">{ label }</span>
+          <i className="sc-collapse-arrow fa far fa-angle-right"/>
+        </Button>
       </div>
-      <Collapse isOpen={open === index} className={classes.collapse}>
-        <Col sm={12} className="px-4 mb-3 pt-2">
-          {fields.map((field, index) => {
-            return (
-              <FormGroup check key={index} row>
-                <Label check>
-                  <Input type="checkbox" /> {field}
-                </Label>
-              </FormGroup>
-            )
-          })}
-        </Col>
-      </Collapse>
-    </>
+      <FormGroup
+        id={ `moduleGroupCol2-${index}` }
+        className={`sc-collapse-panel-lv2 my-2 px-4 w-100 ${open === index ? 'd-block' : 'd-none'}`}
+      >
+        <h2 className="sc-heading d-none d-lg-block">{ label }</h2>
+        {fields.map((field, fieldIndex) => {
+          return (
+            <CustomInput
+              key={ fieldIndex }
+              type="checkbox"
+              className="sc-module-group-checkbox"
+              id={ checkboxId(label, field) }
+              name={ checkboxId(label, field) }
+              label={ field }
+              defaultChecked={ checkAll[index].isChecked }
+              onChange={(e) => { responseCheckAll(e, fieldIndex) }}
+            />
+          )
+        })}
+      </FormGroup>
+    </div>
   )
 }
 
 ModuleGroup.propTypes = {
   label: PropTypes.string,
-  fields: PropTypes.object,
+  fields: PropTypes.array,
   index: PropTypes.number,
-  open: PropTypes.oneOfType[(PropTypes.object, PropTypes.number)],
+  open: PropTypes.number,
   setOpen: PropTypes.func,
+  checkAll: PropTypes.array,
+  setCheckAll: PropTypes.func,
 }
 
 export default ModuleGroup

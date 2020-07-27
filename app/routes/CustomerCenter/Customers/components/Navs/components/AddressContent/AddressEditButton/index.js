@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Modal, ModalBody, ModalHeader, Row, Col, Form, FormGroup, Label, Input} from 'reactstrap'
 import {makeStyles} from '@material-ui/core/styles'
-import iconEdit from 'images/commonIcons/edit.svg'
+import iconEdit from 'routes/components/CustomIconButton/node_modules/images/commonIcons/edit.svg'
 import CommonButton from 'routes/components/CommonButton'
 
 const useStyles = makeStyles({

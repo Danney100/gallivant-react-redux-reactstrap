@@ -14,7 +14,7 @@ import {
   ListGroupItem,
 } from 'reactstrap'
 import {makeStyles} from '@material-ui/core/styles'
-import iconEdit from 'images/commonIcons/edit.svg'
+import iconEdit from 'routes/components/CustomIconButton/node_modules/images/commonIcons/edit.svg'
 
 const useStyles = makeStyles({
   media: {
@@ -169,14 +169,14 @@ const WalletEditButton = () => {
           </Row>
         </ModalBody>
       </Modal>
-      <div color="link" onClick={toggle} className={classes.buttonSize}>
+      <div color="danger" onClick={toggle} className={classes.buttonSize}>
         <Row>
           <Col>
             <div className={classes.imgSize}>
               <img src={iconEdit} className={classes.imageSize} />
             </div>
           </Col>
-          <Col>Edit</Col>
+          <Col>Edt</Col>
         </Row>
       </div>
     </div>

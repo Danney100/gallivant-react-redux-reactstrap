@@ -39,7 +39,7 @@ export const SearchResult = () => {
 
   return (
     <Row form className="mr-1">
-      <Col md={11} className>
+      <Col md={11}>
         <FormGroup row className="mr-md-5 mx-4">
           <Pagination className="mt-3" aria-label="Page navigation example">
             <PaginationItem disabled>

@@ -67,6 +67,11 @@ import ShippingFileConfiguration from './Shipping/ShippingFileCenter/ShippingFil
 import AddNewShippingFile from './Shipping/ShippingFileCenter/AddNewShipping'
 import Translate from './CustomerCenter/Translate'
 import VideosResults from './Apps/VideosResults'
+import CompensationRuns from './Compensation/CompensationRuns'
+import Tastings from './Tastings'
+import ViewCompensation from './Compensation/ViewCompensation'
+import ProcessSkyWalletPayouts from './Compensation/ProcessSkyWalletPayouts'
+import NewSkyWalletPayout from './Compensation/ProcessSkyWalletPayouts/NewSkyWalletPayout'
 
 //------ PrivateRoute Definitions --------
 // eslint-disable-next-line no-unused-vars
@@ -75,6 +80,8 @@ export const RoutedContent = () => {
     <Switch>
       <Redirect from="/" to="/login" exact />
 
+      <PrivateRoute path="/compensation/compensation-run" exact component={CompensationRuns} />
+      <PrivateRoute path="/tastings/new-order/checkout" exact component={Tastings} />
       <PrivateRoute path="/dashboards" exact component={Dashboard} />
       <PrivateRoute path="/customer-center" exact component={CustomerCenter} />
       <PrivateRoute path="/customer-center/customer-create" exact component={CustomerCreate} />
@@ -223,12 +230,24 @@ export const RoutedContent = () => {
       <PrivateRoute path="/shipping/create-shipping-file-run" component={NewShippingRun} />
       <PrivateRoute path="/shipping/import-shipping-file" component={ImportShippingFile} />
 
+      <PrivateRoute path="/compensation/view-compensation" exact component={ViewCompensation} />
+      <PrivateRoute
+        path="/compensation/sky-wallet-payouts"
+        exact
+        component={ProcessSkyWalletPayouts}
+      />
+      <PrivateRoute
+        path="/compensation/sky-wallet-payouts/new-sky-wallet-payout-method"
+        exact
+        component={NewSkyWalletPayout}
+      />
+
       {/* Profile Routes */}
       <PrivateRoute component={VideosResults} path="/Videos/Vimeo" />
 
       {/*    Pages Routes    */}
       <PrivateRoute component={Error404} path="/pages/error-404" />
-      <PrivateRoute component={ForgotPassword} path="/pages/forgot-password" />
+      <PublicRoute component={ForgotPassword} path="/pages/forgot-password" />
       <PublicRoute component={Login} path="/login" />
       <PublicRoute component={Register} path="/pages/register" />
       {/*    404    */}

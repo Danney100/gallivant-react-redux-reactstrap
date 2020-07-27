@@ -24,6 +24,7 @@ export function scColor() {
         actionBtnBg: '#e6e0dd',
         itemActive: '#de8b6d',
         borderColor: '#ebe9e8',
+        dropdownShadowColor: '#d9d7d6',
     };
 }
 

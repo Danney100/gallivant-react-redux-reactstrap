@@ -12,6 +12,10 @@ export const cssReactSelect = {
             borderColor: scVar.inputBackground,
         },
     }),
+    valueContainer: styles => ({
+        ...styles,
+        paddingLeft: `${14 / scVar.fontBase}em`,
+    }),
     placeholder: styles => ({
         ...styles,
         color: scVar.textPlaceholderColor,

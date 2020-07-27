@@ -11,8 +11,8 @@ export const SidebarWithNavbarNavbar = () => {
       {() => (
         <React.Fragment>
           <Navbar light expand fluid style={{background: '#fcfaf9'}}>
-            <Nav navbar xs="auto">
-              <NavItem className="my-auto">
+            <Nav navbar xs="auto" style={{display: 'block', width: '100%'}}>
+              <NavItem className="my-auto float-left">
                 <SidebarTrigger />
               </NavItem>
               <NavItem>
