@@ -44,7 +44,12 @@ const Product = (props) => {
         <Col key={product.id} md={4} sm={6} xs={12}>
           <div>
             <Card>
-              <CardImg top src={Wine1} alt="Card image cap" style={{height: '252px'}} />
+              <CardImg
+                top
+                src={Wine1}
+                alt="Card image cap"
+                style={{height: '235px', width: '140px'}}
+              />
               <CardBody>
                 <CardTitle>{product.name}</CardTitle>
                 <CardSubtitle className="d-flex justify-content-center">
